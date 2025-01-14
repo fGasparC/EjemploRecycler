@@ -1,0 +1,30 @@
+package com.example.recyclerview
+
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.recyclerview.databinding.ItemPokemonBinding
+
+class PokemonAdapter(private val pokemons: List<Pokemon>, private val listener: OnClickListener) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val view= LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon,parent,false)
+        return ViewHolder(view)
+    }
+
+    override fun getItemCount()= pokemons.size
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val pokemon= pokemons.get(position)
+        holder.binding.textview.text=pokemon.nombre
+        Log.v("Pokemon",pokemon.toString())
+    }
+
+    inner class ViewHolder (view: View): RecyclerView.ViewHolder(view){
+
+        val binding=ItemPokemonBinding.bind(view)
+
+    }
+}
