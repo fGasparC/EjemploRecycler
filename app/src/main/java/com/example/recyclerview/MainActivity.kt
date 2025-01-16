@@ -2,6 +2,7 @@ package com.example.recyclerview
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -63,9 +64,33 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             layoutManager= LinearLayoutManager(this@MainActivity)
             adapter=pokemonAdapter
         }
+        binding.anadir.setOnClickListener{
+            if(binding.etpokemon.text.toString().isNotEmpty()){
+                val pokemon= Pokemon(binding.etpokemon.text.toString(),100,"marronero",10)
+
+                addPokemonAutomatically(pokemon)
+
+                binding.etpokemon.text?.clear()
+            }
+        }
     }
 
     override fun onLongClick(pokemon: Pokemon) {
-        TODO("Not yet implemented")
+        val builder= AlertDialog.Builder(this)
+        builder.setTitle("Eliminar pokemon")
+        builder.setMessage("¿Estas seguro de que quieres eliminar a ${pokemon.nombre}?")
+        builder.setPositiveButton("Si"){_,_->
+            pokemonAdapter.removePokemon(pokemon)
+        }
+        builder.setNegativeButton("No"){ _, _ ->
+
+        }
+        builder.show()
+    }
+    private fun addPokemonAutomatically(pokemon: Pokemon){
+        pokemonAdapter.addPokemon(pokemon)
+    }
+    private fun removePokemonAutomatically(pokemon: Pokemon){
+        pokemonAdapter.removePokemon(pokemon)
     }
 }
