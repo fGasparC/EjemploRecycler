@@ -26,7 +26,7 @@ class Menu : AppCompatActivity() {
             startActivity(intent)
         }
         btn2.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, Ejercicio2::class.java)
             startActivity(intent)
         }
         btn3.setOnClickListener{

@@ -20,7 +20,16 @@ class ContactoAdapter (private val contactos: MutableList<Contacto>): RecyclerVi
         holder.binding.nomUsuario.text=contacto.nombre
         holder.binding.email.text=contacto.email
         holder.binding.telefono.text=contacto.telefono
-        holder.binding.Foto.setImageResource(contacto.imagen)
+        //PROBLEMA CON LA API 28. CON API 35 FUNCIONA
+        //CON MATERIALIMAGESHAPEABLE FALLA CON IMAGECOMPAT FURULA.
+        holder.binding.Foto.setImageResource(
+            when(contacto.imagen){
+                "androide" -> R.drawable.androide
+                "pato3" -> R.drawable.pato3
+                "androide3" ->R.drawable.androide3
+                else -> R.drawable.androide
+            }
+        )
     }
     inner class ViewHolder (view: View): RecyclerView.ViewHolder(view){
         val binding= ItemContactoBinding.bind(view)

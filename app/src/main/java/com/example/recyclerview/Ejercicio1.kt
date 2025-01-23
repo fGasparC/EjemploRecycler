@@ -22,19 +22,19 @@ class Ejercicio1 : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val and1=R.drawable.androide
-        val and2=R.drawable.pato3
-        val and3=R.drawable.androide3
+        val and1="androide"
+        val and2="pato3"
+        val and3="androide3"
         val data= mutableListOf(
             Contacto("Peptio","a@email.com","666555444", and1),
             Contacto("Peptio","aa@email.com","666555444", and2),
-            Contacto("Peptio","aaa@email.com","666555444", and2),
-            Contacto("Peptio","aaaa@email.com","666555444", and2),
+            Contacto("Peptio","aaa@email.com","666555444", and3),
+            Contacto("Peptio","aaaa@email.com","666555444", and1),
             Contacto("Peptio","aaasdf@email.com","666555444", and2),
-            Contacto("Peptio","asdafas@email.com","666555444", and2),
-            Contacto("Peptio","bbb@email.com","666555444", and2),
+            Contacto("Peptio","asdafas@email.com","666555444", and3),
+            Contacto("Peptio","bbb@email.com","666555444", and1),
             Contacto("Peptio","bbba@email.com","666555444", and2),
-            Contacto("Peptio","afdsa@email.com","666555444", and2),
+            Contacto("Peptio","afdsa@email.com","666555444", and3),
             Contacto("Ptio","aasdf@email.com","666555444", and2),
             Contacto("Peptio","a@email.com","666555444", and2),
             Contacto("Peptio","a@email.com","666555444", and2),
