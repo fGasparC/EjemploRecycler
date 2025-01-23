@@ -45,22 +45,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
+                android:text="Pokemons Conocidos"
                 android:background="@color/white"
                 android:textSize="10sp">
-
             </TextView>
 
         </LinearLayout>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/reclycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_pokemon"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reclycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:rotationY="-6"
+            tools:listitem="@layout/item_pokemon" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:textSize="25sp">
+
+        </androidx.appcompat.widget.AppCompatTextView>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reclycler_viewdos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_pokemon"/>
+            android:rotationY="6"
+            tools:listitem="@layout/item_pokemon" />
     </LinearLayout>
+
 </ScrollView>
 

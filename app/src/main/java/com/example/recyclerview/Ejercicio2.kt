@@ -28,7 +28,7 @@ class Ejercicio2 : AppCompatActivity() {
             Pieza("LA REINA","reina"),
             Pieza("EL REY","rey"),
             Pieza("EL PEON","peon"),
-            Pieza("EL CABALLO","caballo")
+            Pieza("ER CABALLO","caballo")
         )
         adapPieza= PiezaAdapter(data)
         binding.reclyclerView.apply{

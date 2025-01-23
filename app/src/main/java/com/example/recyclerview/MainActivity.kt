@@ -13,6 +13,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pokemonAdapter: PokemonAdapter
+    private lateinit var pokCapAdapter: PokemonCapturadoAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,6 +60,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             Pokemon("Pokemoncito150",1000,"marronero",10),
             Pokemon("Pokemoncito16",1000,"marronero",10)
         )
+        val dataCapturado= mutableListOf(
+            Pokemon("Pokemoncito1",100,"marronero",10),
+            Pokemon("Pokemoncito2",100,"marronero",10),
+            Pokemon("Pokemoncito3",100,"marronero",10),
+            Pokemon("Pokemoncito4",100,"marronero",10),)
         pokemonAdapter=PokemonAdapter(data,this)
         binding.reclyclerView.apply{
             layoutManager= LinearLayoutManager(this@MainActivity)
@@ -73,7 +79,13 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 binding.etpokemon.text?.clear()
             }
         }
+        pokCapAdapter= PokemonCapturadoAdapter(dataCapturado,this)
+        binding.reclyclerViewdos.apply{
+            layoutManager=LinearLayoutManager(this@MainActivity)
+            adapter=pokCapAdapter
+        }
     }
+
 
     override fun onLongClick(pokemon: Pokemon) {
         val builder= AlertDialog.Builder(this)

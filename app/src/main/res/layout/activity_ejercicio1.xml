@@ -7,11 +7,15 @@
     android:background="#E5000000"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/reclycler_view"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:listitem="@layout/item_contacto"/>
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="always"
+            tools:listitem="@layout/item_contacto" />
 
 
 </ScrollView>
