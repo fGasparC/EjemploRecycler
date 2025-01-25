@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.databinding.ItemPokemonBinding
 
-class PokemonCapturadoAdapter(private val pokemonsCapturados: MutableList<Pokemon>, private val listener: OnClickListener) : RecyclerView.Adapter<PokemonCapturadoAdapter.ViewHolder>() {
+class PokemonCapturadoAdapter(private val pokemonsCapturados: MutableList<Pokemon>, private val listener: OnClickListener, private val listener2: CheckSelected) : RecyclerView.Adapter<PokemonCapturadoAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_pokemon, parent, false)
@@ -24,6 +24,8 @@ class PokemonCapturadoAdapter(private val pokemonsCapturados: MutableList<Pokemo
         holder.binding.checkbox.isChecked = pokemon.atrapado
         holder.binding.checkbox.setOnClickListener {
             pokemon.atrapado = holder.binding.checkbox.isChecked
+            holder.isChecked(pokemon)
+            listener2.onPokemonSelected(pokemon)
         }
     }
 
@@ -35,6 +37,10 @@ class PokemonCapturadoAdapter(private val pokemonsCapturados: MutableList<Pokemo
                 listener.onLongClick(pokemon)
                 true
             }
+        }
+        fun isChecked(pokemon:Pokemon):Boolean{
+            Log.d("PokemonAdapter2", "isChecked: Pokémon ${pokemon.nombre} ahora está atrapado: ${pokemon.atrapado}")
+            return pokemon.atrapado
         }
     }
 

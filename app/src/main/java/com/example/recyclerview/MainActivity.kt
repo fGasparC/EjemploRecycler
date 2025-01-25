@@ -1,6 +1,7 @@
 package com.example.recyclerview
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : AppCompatActivity(), OnClickListener,CheckSelected {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pokemonAdapter: PokemonAdapter
@@ -61,11 +62,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             Pokemon("Pokemoncito16",1000,"marronero",10)
         )
         val dataCapturado= mutableListOf(
-            Pokemon("Pokemoncito1",100,"marronero",10),
-            Pokemon("Pokemoncito2",100,"marronero",10),
-            Pokemon("Pokemoncito3",100,"marronero",10),
-            Pokemon("Pokemoncito4",100,"marronero",10),)
-        pokemonAdapter=PokemonAdapter(data,this)
+            Pokemon("Pokemoncito1",100,"marronero",10,true),
+            Pokemon("Pokemoncito2",100,"marronero",10,true),
+            Pokemon("Pokemoncito3",100,"marronero",10,true),
+            Pokemon("Pokemoncito4",100,"marronero",10,true))
+
+        pokemonAdapter=PokemonAdapter(data,this,this)
         binding.reclyclerView.apply{
             layoutManager= LinearLayoutManager(this@MainActivity)
             adapter=pokemonAdapter
@@ -73,13 +75,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         binding.anadir.setOnClickListener{
             if(binding.etpokemon.text.toString().isNotEmpty()){
                 val pokemon= Pokemon(binding.etpokemon.text.toString(),100,"marronero",10)
-
                 addPokemonAutomatically(pokemon)
-
                 binding.etpokemon.text?.clear()
             }
         }
-        pokCapAdapter= PokemonCapturadoAdapter(dataCapturado,this)
+        pokCapAdapter= PokemonCapturadoAdapter(dataCapturado,this,this)
         binding.reclyclerViewdos.apply{
             layoutManager=LinearLayoutManager(this@MainActivity)
             adapter=pokCapAdapter
@@ -99,10 +99,28 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         }
         builder.show()
     }
+    override fun onPokemonSelected(pokemon: Pokemon){
+        if (pokemon.atrapado) {
+            pokemonAdapter.removePokemon(pokemon)
+            pokCapAdapter.addPokemonCapturado(pokemon.copy())
+        } else {
+            pokemonAdapter.addPokemon(pokemon.copy())
+            pokCapAdapter.removePokemonCapturado(pokemon)
+        }
+        Log.d("MainActivity", "onPokemonSelected: Pokémon seleccionado: ${pokemon.nombre}")
+        pokemonAdapter.notifyDataSetChanged()
+        pokCapAdapter.notifyDataSetChanged()
+    }
     private fun addPokemonAutomatically(pokemon: Pokemon){
         pokemonAdapter.addPokemon(pokemon)
     }
     private fun removePokemonAutomatically(pokemon: Pokemon){
         pokemonAdapter.removePokemon(pokemon)
+    }
+    fun movePokemon(pokemon: Pokemon){
+        pokemonAdapter.removePokemon(pokemon)
+        pokCapAdapter.addPokemonCapturado(pokemon)
+        pokemonAdapter.notifyDataSetChanged()
+        pokCapAdapter.notifyDataSetChanged()
     }
 }
